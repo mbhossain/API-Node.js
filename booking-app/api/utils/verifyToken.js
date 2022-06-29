@@ -28,6 +28,7 @@ export const verifyUser = (req, res, next) => {
     });
 };
 
+//next issue isn't solved
 export const verifyAdmin = (req, res, next) => {
     verifyToken(req, res, () => {
         if (req.user.isAdmin) {
