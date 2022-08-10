@@ -7,9 +7,28 @@ import authRoute from "./routes/auth.js";
 import usersRoute from "./routes/users.js";
 import hotelsRoute from "./routes/hotels.js";
 import roomsRoute from "./routes/rooms.js";
+import cors from "cors"
 
 
 const app = express()
+
+const corsOpts = {
+    origin: '*',
+  
+    methods: '*',
+  
+    allowedHeaders: '*'
+  };
+  
+  app.use(cors(corsOpts));
+
+// app.use(
+//     cors({
+//       origin: 'http://localhost:4200',
+//       // Allow follow-up middleware to override this CORS for options
+//       preflightContinue: true,
+//     }),
+//   );
 
 dotenv.config()
 
@@ -37,12 +56,16 @@ mongoose.connection.on('disconnected', () => {
 app.use(cookieParser());
 app.use(express.json());
 
-app.use('/api/auth', authRoute);
+app.use('/api/auth',  authRoute);
 app.use('/api/users', usersRoute);
 app.use('/api/hotels', hotelsRoute);
-app.use('/api/rooms', roomsRoute);
+app.use('/api/rooms',  roomsRoute);
 
 app.use((err, req, res, next) => {
+    // res.setHeader('Access-Control-Allow-Origin', '*');
+    // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS',);
+    // res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    // res.setHeader('Access-Control-Allow-Credentials', true);
     const errorStatus = err.status || 500;
     const errorMessage = err.message || "Something went wrong!";
     return res.status(errorStatus).json({
@@ -52,6 +75,7 @@ app.use((err, req, res, next) => {
         stack: err.stack,
     });
 });
+
 
 app.listen(8800, () => {
     connect()
