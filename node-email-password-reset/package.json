@@ -1,0 +1,20 @@
+{
+  "name": "node-email-password-reset",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^9.0.2",
+    "express": "^4.17.1",
+    "joi": "^17.4.0",
+    "mongoose": "^5.12.10",
+    "nodemailer": "^6.6.0",
+    "nodemon": "^2.0.20"
+  }
+}
